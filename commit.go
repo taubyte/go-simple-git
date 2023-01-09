@@ -20,15 +20,16 @@ func (c *Repository) Commit(message string, files string) error {
 
 	w, err := c.repo.Worktree()
 	if err != nil {
-		return fmt.Errorf("Fetching work tree failed with %s", err.Error())
+		return fmt.Errorf("fetching work tree failed with %s", err.Error())
 	}
 
 	_, err = w.Add(files)
 	if err != nil {
-		return fmt.Errorf("Adding files failed with %s", err.Error())
+		return fmt.Errorf("adding files failed with %s", err.Error())
 	}
 
 	commit, err := w.Commit(message, &git.CommitOptions{
+		All: true,
 		Author: &object.Signature{
 			Name:  c.user.name,
 			Email: c.user.email,
@@ -38,7 +39,7 @@ func (c *Repository) Commit(message string, files string) error {
 
 	_, err = c.repo.CommitObject(commit)
 	if err != nil {
-		return fmt.Errorf("Commiting changes failed with %s", err.Error())
+		return fmt.Errorf("commiting changes failed with %s", err.Error())
 	}
 
 	return nil
