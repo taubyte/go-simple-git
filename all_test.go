@@ -16,7 +16,7 @@ var (
 	testRepoToken   string
 	testRepoUser    = "taubyte-test"
 	testRepoName    = "tb_testproject"
-	testRepoEmail   = "taf@taubyte.com"
+	testRepoEmail   = "taubytetest@gmail.com"
 )
 
 func init() {
