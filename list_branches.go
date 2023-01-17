@@ -13,14 +13,14 @@ ListBranches will return a list of branches for the repository
 fetch true will search remote origin to gather all branches
 fetch false will search .git/config to gather branches
 */
-func (c *Repository) ListBranches(fetch bool) (branches []string, fetchErr error, err error) {
+func (r *Repository) ListBranches(fetch bool) (branches []string, fetchErr error, err error) {
 	if fetch == true {
-		return c.fetchAndListBranches()
+		return r.fetchAndListBranches()
 	}
 
-	branchRef, err := c.repo.Branches()
+	branchRef, err := r.repo.Branches()
 	if err != nil {
-		return nil, fetchErr, fmt.Errorf("listing branches for repository: `%s` failed with: %s", c.url, err)
+		return nil, fetchErr, fmt.Errorf("listing branches for repository: `%s` failed with: %s", r.url, err)
 	}
 
 	branches = make([]string, 0)
@@ -29,25 +29,25 @@ func (c *Repository) ListBranches(fetch bool) (branches []string, fetchErr error
 		return nil
 	})
 	if err != nil {
-		return nil, fetchErr, fmt.Errorf("branchRef.ForEach() for repository: `%s` failed with: %s", c.url, err)
+		return nil, fetchErr, fmt.Errorf("branchRef.ForEach() for repository: `%s` failed with: %s", r.url, err)
 	}
 
 	return branches, fetchErr, nil
 }
 
-func (c *Repository) fetchAndListBranches() (branches []string, fetchErr error, err error) {
-	fetchErr = c.Fetch()
+func (r *Repository) fetchAndListBranches() (branches []string, fetchErr error, err error) {
+	fetchErr = r.Fetch()
 
-	rem, err := c.repo.Remote("origin")
+	rem, err := r.repo.Remote("origin")
 	if err != nil {
-		return nil, fetchErr, fmt.Errorf("getting remote origin for repository: `%s` failed with: %s", c.url, err)
+		return nil, fetchErr, fmt.Errorf("getting remote origin for repository: `%s` failed with: %s", r.url, err)
 	}
 
 	remoteLister, err := rem.List(&git.ListOptions{
-		Auth: c.auth,
+		Auth: r.auth,
 	})
 	if err != nil {
-		return nil, fetchErr, fmt.Errorf("listing origin references for repository: `%s` failed with: %s", c.url, err)
+		return nil, fetchErr, fmt.Errorf("listing origin references for repository: `%s` failed with: %s", r.url, err)
 	}
 
 	branches = make([]string, 0)
