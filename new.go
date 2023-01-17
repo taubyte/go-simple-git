@@ -53,7 +53,7 @@ func New(ctx context.Context, options ...Option) (c *Repository, err error) {
 	}
 
 	if c.usingSpecificBranch == true {
-		err = c.checkout(c.branches[0])
+		err = c.Checkout(c.branches[0])
 		if err != nil {
 			return
 		}

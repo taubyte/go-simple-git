@@ -8,7 +8,7 @@ import (
 	"github.com/go-git/go-git/v5/plumbing"
 )
 
-func (c *Repository) checkout(branchName string) error {
+func (c *Repository) Checkout(branchName string) error {
 	wt, err := c.repo.Worktree()
 	if err != nil {
 		return err
