@@ -1,4 +1,7 @@
-## go-simple-git
+# go-simple-git
+
+[![GoDoc](https://godoc.org/github.com/taubyte/go-simple-git?status.svg)](https://pkg.go.dev/github.com/taubyte/go-simple-git)
+[![Go Report Card](https://goreportcard.com/badge/taubyte/go-simple-git)](https://goreportcard.com/report/taubyte/go-simple-git)
 
 ### Description
 This is a simply git client which simplifies calls to go-git and provides an interface for interacting with git.

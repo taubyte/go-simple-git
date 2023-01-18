@@ -39,7 +39,7 @@ func (c *Repository) Commit(message string, files string) error {
 
 	_, err = c.repo.CommitObject(commit)
 	if err != nil {
-		return fmt.Errorf("commiting changes failed with %s", err.Error())
+		return fmt.Errorf("committing changes failed with %s", err.Error())
 	}
 
 	return nil
