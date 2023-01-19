@@ -1,7 +1,10 @@
 # go-simple-git
 
-[![GoDoc](https://godoc.org/github.com/taubyte/go-simple-git?status.svg)](https://pkg.go.dev/github.com/taubyte/go-simple-git)
+[![Release](https://img.shields.io/github/release/taubyte/go-simple-git.svg)](https://github.com/taubyte/go-simple-git/releases)
+[![License](https://img.shields.io/github/license/taubyte/go-simple-git)](LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/taubyte/go-simple-git)](https://goreportcard.com/report/taubyte/go-simple-git)
+[![GoDoc](https://godoc.org/github.com/taubyte/go-simple-git?status.svg)](https://pkg.go.dev/github.com/taubyte/go-simple-git)
+[![Discord](https://img.shields.io/discord/973677117722202152?color=%235865f2&label=discord)](https://tau.link/discord)
 
 ### Description
 This is a simply git client which simplifies calls to go-git and provides an interface for interacting with git.
