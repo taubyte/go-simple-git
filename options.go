@@ -35,6 +35,23 @@ func Token(token string) Option {
 	}
 }
 
+/* EmbeddedToken is an Option to set the repository token.
+ * the token will also be embedded in the remote url.
+ *
+ * token: The token to use.
+ */
+func EmbeddedToken(token string) Option {
+	return func(c *Repository) error {
+		c.embedToken = true
+		c.auth = &http.BasicAuth{
+			Username: fakeUserforTokenAuth,
+			Password: token,
+		}
+
+		return nil
+	}
+}
+
 /* SSHKey is an Option to set the repository SSH key.
  *
  * key: The key to use.

@@ -2,6 +2,7 @@ package gosimplegit
 
 import (
 	"context"
+	"fmt"
 	"os"
 
 	"github.com/go-git/go-git/v5"
@@ -79,9 +80,19 @@ func (c *Repository) open_or_clone() error {
 
 func (c *Repository) clone() error {
 	Info("Cloning from " + c.url + " on branch " + c.branches[0] + " into " + c.root + "\n")
+
+	cloneURL := c.url
+	if c.embedToken == true {
+		var err error
+		cloneURL, err = embedGitToken(c.url, c.auth)
+		if err != nil {
+			return fmt.Errorf("embedding token failed with: %s", err)
+		}
+	}
+
 	var err0 error
 	c.repo, err0 = git.PlainCloneContext(c.ctx, c.root, false, &git.CloneOptions{
-		URL:      c.url,
+		URL:      cloneURL,
 		Progress: os.Stdout,
 		Auth:     c.auth,
 	})
