@@ -84,7 +84,7 @@ func (c *Repository) clone() error {
 	cloneURL := c.url
 	if c.embedToken == true {
 		var err error
-		cloneURL, err = embedGitToken(c.url, c.auth)
+		cloneURL, err = embedGitToken(cloneURL, c.auth)
 		if err != nil {
 			return fmt.Errorf("embedding token failed with: %s", err)
 		}
