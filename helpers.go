@@ -8,9 +8,13 @@ import (
 	"crypto/rand"
 	"crypto/x509"
 	"encoding/pem"
+	"fmt"
+	"strings"
 
 	"golang.org/x/crypto/ssh"
 
+	"github.com/go-git/go-git/v5/plumbing/transport"
+	"github.com/go-git/go-git/v5/plumbing/transport/http"
 	"github.com/google/go-github/v32/github"
 	"golang.org/x/oauth2"
 )
@@ -68,4 +72,18 @@ func injectDeploymentKey(ctx context.Context, client *github.Client, user, repoN
 		Key:   &key,
 	})
 	return err
+}
+
+// TODO support other git providers
+func embedGitToken(url string, auth transport.AuthMethod) (string, error) {
+	if strings.Contains(url, "github.com") {
+		basic, ok := auth.(*http.BasicAuth)
+		if !ok {
+			return "", fmt.Errorf("unsupported auth method: %T", auth)
+		}
+
+		return strings.Replace(url, "github.com", fmt.Sprintf("%s@github.com", basic.Password), 1), nil
+	}
+
+	return "", fmt.Errorf("unsupported url: %s", url)
 }
