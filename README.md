@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/973677117722202152?color=%235865f2&label=discord)](https://tau.link/discord)
 
 ### Description
-This is a simply git client which simplifies calls to go-git and provides an interface for interacting with git.
+This is a git client which simplifies calls to go-git and provides an interface for interacting with git.
 
 
 ### Testing
